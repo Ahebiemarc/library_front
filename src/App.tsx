@@ -1,26 +1,42 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import AddBook from './components/AddBook';
+import BorrowBook from './components/BorrowBook';
+import ReturnBook from './components/ReturnBook';
+import ListBooks from './components/ListBooks';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        {/* Barre de navigation */}
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Lister les livres</Link>
+            </li>
+            <li>
+              <Link to="/add">Ajouter un livre</Link>
+            </li>
+            <li>
+              <Link to="/borrow">Emprunter un livre</Link>
+            </li>
+            <li>
+              <Link to="/return">Retourner un livre</Link>
+            </li>
+          </ul>
+        </nav>
+
+        {/* Définition des routes */}
+        <Routes>
+          <Route path="/" element={<ListBooks />} />
+          <Route path="/add" element={<AddBook />} />
+          <Route path="/borrow" element={<BorrowBook />} />
+          <Route path="/return" element={<ReturnBook />} />
+        </Routes>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
