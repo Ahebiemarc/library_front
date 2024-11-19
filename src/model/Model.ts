@@ -1,9 +1,9 @@
 // models/Book.ts
 export interface Book {
-    id: number;
+    id?: number;
     title: string;
     author: string;
-    available: boolean;
+    status?: 'available' | 'borrowed';
   }
   
   // models/Borrow.ts

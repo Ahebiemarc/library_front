@@ -6,7 +6,19 @@ const ListBooks = () => {
   const [books, setBooks] = useState<Book[]>([]);
 
   useEffect(() => {
-    setBooks(listBooks());
+    // Fetch the list of books on component mount
+    const fetchBooks = async () => {
+      try {
+        const fetchedBooks = await listBooks();
+        console.log(fetchedBooks);
+        
+        setBooks(fetchedBooks);
+      } catch (error) {
+        console.error('Failed to fetch books:', error);
+      }
+    };
+
+    fetchBooks();
   }, []);
 
   return (
@@ -17,7 +29,7 @@ const ListBooks = () => {
         <ul>
         {books.map((book) => (
             <li key={book.id} style={{fontSize: '18px'}}>
-            {book.id} {`=>`} {book.title} de {book.author} - {book.available ? 'Disponible' : 'Emprunté'}
+            {book.id} {`=>`} {book.title} de {book.author} - {book.status === 'available' ? 'Disponible' : 'Emprunté'}
             </li>
         ))}
         </ul>
